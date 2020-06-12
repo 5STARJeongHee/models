@@ -28,3 +28,61 @@ If you want to contribute, please review the [contribution guidelines](../../wik
 ## License
 
 [Apache License 2.0](LICENSE)
+
+## bing_crawler.py
+-----------------------------
+Bing 웹사이트에서 이미지를 긁어모으는 파이썬 스크립트 코드로
+아래와 같은 설정들을 변경해주어야 사용 가능합니다.
+
+1. 리눅스 전용 라이브러리가 있어서 윈도우에서 사용하려면 
+
+from pyvirtualdisplay import Display
+
+display = Display(visible=0, size=(1024,768))
+display.start()
+
+위의 코드를 지워야 됩니다.
+
+2. 크롬드라이버의 위치에 따라 경로명을 바꾸셔야 합니다.
+
+drv = webdriver.Chrome('/home/ubuntu/Downloads/chromedriver') #현제 크롬 버전과 맞는 크롬 드라이버 위치
+
+위의 코드에서 '/home/ubuntu/Downloads/chromedriver' 부분을 변경 
+
+3. 긁어 모을 이미지의 검색어들을 변경
+
+keyword_list =["시각장애인 블럭","시각장애인 도로","시각장애인 길","점자 도로","Tiles For Disable Blind People"]
+
+위의 코드의 리스트에 있는 검색어들을 지우고 검색하실 검색어들을 넣어주세요
+
+4. url 
+
+search_engine_url = "https://www.bing.com/images/search?q="+keyword+"&qs=n&form=QBIR&qft=%20filterui%3Aimagesize-custom_512_512"
+
+위와 같이 url의 keyword 뒷 부분에 512x512 이상의 이미지만 검색하도록 되어 있으므로 keword 뒷 부분을 없애시면 512x512 크기 보다 작은 이미지도 검색 가능합니다.
+
+5. 크기 512x512 이상인 이미지만 저장되는 부분
+
+ if width>=512 and height>=512: # 크기가 512 x 512 이상인 경우만
+
+            count= count+1
+            print(count)
+            try:
+
+                params.append(img_src.get('src'))
+
+            except KeyError:
+
+                params.append(img_src.get('data-src'))
+
+        drv.close()
+
+        drv.switch_to.window(tabs[0])
+        
+위의 코드의 512x512 이상의 이미지만 골라 내기 위해 사용했었음 512를 다른 숫자로 변경하면 다른 크기의 이미지도 저장되게 할 수 있습니다.
+
+6. 이미지 저장 경로 변경
+
+store_loc=r"/home/ubuntu/Crawling/BrailleBlock/"
+
+위의 변수의 경로를 변경하시면 됩니다. 
