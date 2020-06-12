@@ -178,7 +178,7 @@ for keyword in keyword_list:
 
         try:
 
-            name, header = urllib.request.urlretrieve(loc,store_loc + file_name + str(id)+".png")
+            name, header = urllib.request.urlretrieve(loc,store_loc + file_name + str(id)+".jpg")
             time.sleep(1)
         except Exception as e:#에러 처리 http 403 forbidden 같은 예외 처리
 
