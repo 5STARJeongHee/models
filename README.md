@@ -35,22 +35,31 @@ Bing 웹사이트에서 이미지를 긁어모으는 파이썬 스크립트 코�
 아래와 같은 설정들을 변경해주어야 사용 가능합니다.
 
 0. 설치 해야할 것: 
+
 1)크롬
 
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+
 sudo sh -c 'echo "sudo deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+
 sudo apt-get update
+
 sudo apt-get install google-chrome-stable
+
 
 2)크롬드라이버
 
 wget https://chromedriver.storage.googleapis.com/83.0.4103.39/chromedriver_linux64.zip
+
 unzip chromedriver_linux64.zip
 
 
 3)xvfb, python, python-pip
+
 sudo apt-get install xvfb python3.6
+
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.6
+
 
 4)selenium, bs4, pyvirtualdisplay (드라이버를 팬텀으로 써도 브라우저 동작하는 모습을 안보이게 할수 있다.)
 
@@ -61,6 +70,7 @@ pip install seleium bs4 pyvirtualdisplay
 from pyvirtualdisplay import Display
 
 display = Display(visible=0, size=(1024,768))
+
 display.start()
 
 위의 코드를 지워야 됩니다.
@@ -110,5 +120,8 @@ store_loc=r"/home/ubuntu/Crawling/BrailleBlock/"
 위의 변수의 경로를 변경하시면 됩니다. 
 
 7. 타임스탬프 찍기
+
 from datetime import datetime 이렇게 임포트해서 
+
 print(str(datetime.now())) 이 코드로 timestamp 찍는거 참고하려고 여기에 잠시 썼습니다.
+
